@@ -13,6 +13,8 @@ app.addEventListener("listen", ({ hostname, port }) => {
   console.log(
     `Start litening on ` + `${hostname ?? "localhost"}: ${port}`
   );
+  console.log(Deno.env.get("ENV"));
+  
 });
 
 app.listen({ port });
