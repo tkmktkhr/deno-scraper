@@ -14,6 +14,12 @@ const config: DenonConfig = {
       desc: "Run the main server",
       env: env(),
       watch: true
+    },
+    debug: {
+      cmd: "deno run --inspect -c tsconfig.json ./src/app.ts",
+      desc: "Run the main server in debug mode",
+      env: env(),
+      watch: true
     }
   },
   watcher: {
