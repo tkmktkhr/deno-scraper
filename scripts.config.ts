@@ -24,11 +24,8 @@ const config: DenonConfig = {
   },
   watcher: {
     interval: 350,
-    exts: [
-      "ts",
-      "json"
-    ],
-    match: ["*.*"],
+    exts: ["js", "jsx", "ts", "tsx", "json"],
+    match: ["**/*.*"],
     skip: ["*/.git/*", "./db/*"]
   },
 };
