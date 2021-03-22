@@ -1,4 +1,25 @@
 # deno-scraper
+## Source tree
+/src
+ ├── constants
+ ├── entities
+ ├── infrastructures
+ │   ├── apis
+ │   └── routers
+ ├── interfaces
+ │   ├── controllers
+ │   ├── databases
+ │   │   ├── models
+ │   │   └── repositoryImples
+ │   ├── repositories
+ │   ├── requests
+ │   └── responses
+ ├── middlewares
+ │   ├── errorHandler.ts
+ │   ├── logger.ts
+ ├── usecases
+ └── valueObjects
+
 ## Start server
 deno run -c tsconfig.json --allow-net --allow-env --allow-read ./src/app.ts
 or
