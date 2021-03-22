@@ -1,0 +1,7 @@
+GET http://localhost:9001/
+
+###
+GET http://localhost:9001/vocabularies
+
+###
+GET http://localhost:9001/tests
