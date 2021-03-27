@@ -1,4 +1,5 @@
 import { Router, Context, RouterContext } from "../../mod.ts";
+import { BadRequest } from "../../common/error.ts"
 // import { VocabularyController } from "../interfaces/controllers/vocabulary/vocabularyController.ts";
 
 const router = new Router();
@@ -40,17 +41,7 @@ router.post(
   },
 );
 
-class BadRequest extends Error {
-  name: string;
-  stausCode: number;
 
-  constructor(msg: string) {
-    super()
-    this.name = msg;
-    this.stausCode = 400;
-    console.log(this.name);
-  }
-}
 
 // router.get(
 //   "/vocabularies/:id",

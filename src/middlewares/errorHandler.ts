@@ -1,50 +1,52 @@
-import { Application, Status, Context, isHttpError } from "../mod.ts";
+import { Status, Context, isHttpError } from "../mod.ts";
 
-// Judge the thrown error and return error obect.
 export const errorHandler = async (ctx: Context, next: () => Promise<void>) => {
   try {
-    // pass here, when every request is received. 
-    console.log('---  CALLED ERRHANDLER ---');
-    
     await next();
   } catch (err) {
     if (isHttpError(err)) {
-      console.log(err);
-      console.log('上のエラーを仕分け');
-      
       switch (err.status) {
         case Status.BadRequest:
-          console.log('BAD REQUEST');
-          console.log(err);
-          ctx.response.status = 400;
-          console.log('---  END CALLED ERRHANDLER ---');
-
-          ctx.response.body = {
-            "name": err.name,
-            "msg": err.message,
-            };
+          ctx.response.status = Status.BadRequest;
+          ctx.response.body = createError(err);
           break;
         case Status.Unauthorized:
+          ctx.response.status = Status.Unauthorized;
+          ctx.response.body = createError(err);
           break;
         case Status.Forbidden:
+          ctx.response.status = Status.Forbidden;
+          ctx.response.body = createError(err);
           break;
         case Status.NotFound:
-          // handle NotFound
+          ctx.response.status = Status.NotFound;
+          ctx.response.body = createError(err);
           break;
         case Status.Conflict:
-          console.log(err);
+          ctx.response.status = Status.Conflict;
+          ctx.response.body = createError(err);
           break;
         default:
-          // handle other statuses
-          console.log(Status.InternalServerError);
-          console.log(err);
+          ctx.response.status = Status.InternalServerError;
+          ctx.response.body = createError(err);
       }
     } else {
-      // rethrow if you can't handle the error
-    console.log(err)
+      // rethrow if it can't handle the error
+      console.log(err)
       console.log('OTHER ERROR IN ERROR HANDLER');
-      
       throw err;
     }
+  }
+};
+
+type TErrorFormat = {
+  name: string,
+  msg: string,
+}
+
+const createError = (err: Error): TErrorFormat => {
+  return {
+    name: err.name,
+    msg: err.message,
   }
 };
