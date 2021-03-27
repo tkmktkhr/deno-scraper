@@ -1,5 +1,6 @@
 import { Application, Context } from "./mod.ts";
 import { errorHandler } from "./middlewares/errorHandler.ts";
+import { setLogger, logError } from "./middlewares/logger.ts";
 import router from "./infrastructures/routers/index.ts";
 
 const app = new Application();
@@ -9,7 +10,10 @@ const port = parseInt(Deno.env.get("PORT") ?? "8001");
 // app.use(router.routes());
 // app.use(errorHandler);
 
+// await setLogger();
+// authorization -> app.pre()
 app.use(errorHandler);
+app.use(logError);
 app.use(router.routes());
 app.use(router.allowedMethods());
 
@@ -21,11 +25,11 @@ app.use(async (ctx: Context, next: () => Promise<void>) => {
 });
 
 // Logger
-app.use(async (ctx, next) => {
-  await next();
-  const rt = ctx.response.headers.get("X-Response-Time");
-  console.log(`${ctx.request.method} ${ctx.request.url} - ${rt}`);
-});
+// app.use(async (ctx, next) => {
+//   await next();
+//   const rt = ctx.response.headers.get("X-Response-Time");
+//   console.log(`${ctx.request.method} ${ctx.request.url} - ${rt}`);
+// });
 
 // app.use(async (ctx: Context, next: () => Promise<void>) => {
 //   console.log('Passing error handler');

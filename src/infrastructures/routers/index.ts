@@ -8,7 +8,7 @@ router.get(
   (context: RouterContext) => {
     // controller
     // const result = await vocabularyController.findAllVocabularies();
-    console.log('inside of get router');
+    console.log('400エラ-投げる');
     
     const result = 'result';
     // context.response.status = 400;
@@ -31,12 +31,12 @@ router.post(
     
     const result = 'result';
     const err = new BadRequest('badrequest');
-    context.response.status = 400;
-    console.log(err);
+    // context.response.status = 400;
+    // console.log(err);
     
-    console.log("Ended process here is Router");
-    console.log(result);
-    context.response.body = result;
+    // console.log("Ended process here is Router");
+    // console.log(result);
+    context.response.body = err;
   },
 );
 

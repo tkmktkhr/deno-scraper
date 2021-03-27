@@ -6,11 +6,12 @@ import { Application, Status, Context, isHttpError } from "../mod.ts";
   //   await next(); // manages the flow control of the middleware execution
   // });
 
+// Judge the thrown error and return error obect.
 export const errorHandler = async (ctx: Context, next: () => Promise<void>) => {
   try {
-    console.log('ERROR HANDLER');
-    console.log(ctx.request);
-    console.log(ctx.response);
+    // pass here, when every request is received. 
+    console.log('---  CALLED ERRHANDLER ---');
+    
     await next();
   } catch (err) {
     if (isHttpError(err)) {
@@ -22,6 +23,8 @@ export const errorHandler = async (ctx: Context, next: () => Promise<void>) => {
           console.log('BAD REQUEST');
           console.log(err);
           ctx.response.status = 400;
+          console.log('---  END CALLED ERRHANDLER ---');
+
           ctx.response.body = {
             "name": err.name,
             "msg": err.message,
@@ -44,7 +47,8 @@ export const errorHandler = async (ctx: Context, next: () => Promise<void>) => {
       }
     } else {
       // rethrow if you can't handle the error
-      console.log('OTHER ERROR');
+    console.log(err)
+      console.log('OTHER ERROR IN ERROR HANDLER');
       
       throw err;
     }

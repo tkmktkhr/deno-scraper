@@ -31,3 +31,9 @@ or
 denon debug
 
 then access chrome://inspect on a chorme browser, click incpect button.
+
+## Check a tree listing of all dependencies and update them
+deno info --no-check src/deps.ts
+
+## Deno cache reload
+deno cache --reload src/deps.ts
