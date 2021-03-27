@@ -1,11 +1,5 @@
 import { Application, Status, Context, isHttpError } from "../mod.ts";
 
-  // app.use((ctx, next) => {
-  //   ctx.request; // contains request information
-  //   ctx.response; // setups up information to use in the response;
-  //   await next(); // manages the flow control of the middleware execution
-  // });
-
 // Judge the thrown error and return error obect.
 export const errorHandler = async (ctx: Context, next: () => Promise<void>) => {
   try {
