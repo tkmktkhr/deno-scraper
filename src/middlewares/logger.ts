@@ -1,34 +1,28 @@
-import { Application, Status, Context, isHttpError, log  } from "../mod.ts";
+import { Application, Context, isHttpError, log, Status } from "../mod.ts";
 
 // setup logger
-export const setLogger = async(target: log.LevelName) => {
+export const setLogger = async (target: log.LevelName) => {
   await log.setup({
     handlers: {
       stringFmt: new log.handlers.ConsoleHandler(target, {
-        formatter: "[deno-{levelName}]: {msg}"
+        formatter: "[deno-{levelName}]: {msg}",
       }),
     },
 
     loggers: {
       // configure default logger available via short-hand methods above.
       default: {
-        level: target, // The lowest out log level.
+        level: target, // The lowest log level.
         handlers: ["stringFmt"],
       },
       prod: {
-        level: "ERROR",
+        level: "WARNING",
         handlers: ["stringFmt"],
       },
     },
   });
-  const setLogger = log.getLogger();
-  setLogger.debug('debug');
-  setLogger.warning('warning');
-  setLogger.info('info');
-  setLogger.error('error');
-  setLogger.critical('critical');
-  return setLogger;
-}
+  return log.getLogger();
+};
 
 // When api throws an Error, the error is caught here.
 export const logError = async (ctx: Context, next: () => Promise<void>) => {
@@ -38,34 +32,36 @@ export const logError = async (ctx: Context, next: () => Promise<void>) => {
     if (isHttpError(err)) {
       switch (err.status) {
         case Status.BadRequest:
-          log.debug('BAD REQUEST DEBUG');
-          log.info('BAD REQUEST INFO');
           log.error(createLog(err));
           break;
         case Status.Unauthorized:
+          log.error(createLog(err));
           break;
         case Status.Forbidden:
+          log.error(createLog(err));
           break;
         case Status.NotFound:
+          log.error(createLog(err));
           break;
         case Status.Conflict:
+          log.error(createLog(err));
           break;
         default:
-          console.log(Status.InternalServerError);
-          console.log(err);
+          log.error(createLog(err));
       }
     } else {
       // rethrow if it can't handle the error
-      console.log('OTHER ERROR IN LOGGER');
+      log.error("EXCEPTION ERROR");
+      log.error(createLog(err));
     }
     throw err;
   }
 };
 
 const createLog = (err: Error): string => {
-  const stack = err.stack ?? '';
+  const stack = err.stack ?? "";
   return `
   [ERR-TYPE] ${err.name}
   [ERR-MSG] ${err.message}
-  [ERR] ${stack}`;
+  [ERR-STACK] ${stack}`;
 };

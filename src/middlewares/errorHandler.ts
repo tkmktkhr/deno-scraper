@@ -1,4 +1,4 @@
-import { Status, Context, isHttpError } from "../mod.ts";
+import { Context, isHttpError, Status } from "../mod.ts";
 
 export const errorHandler = async (ctx: Context, next: () => Promise<void>) => {
   try {
@@ -32,21 +32,21 @@ export const errorHandler = async (ctx: Context, next: () => Promise<void>) => {
       }
     } else {
       // rethrow if it can't handle the error
-      console.log(err)
-      console.log('OTHER ERROR IN ERROR HANDLER');
+      console.log(err);
+      console.log("OTHER ERROR IN ERROR HANDLER");
       throw err;
     }
   }
 };
 
 type TErrorFormat = {
-  name: string,
-  msg: string,
-}
+  name: string;
+  msg: string;
+};
 
 const createError = (err: Error): TErrorFormat => {
   return {
     name: err.name,
     msg: err.message,
-  }
+  };
 };
