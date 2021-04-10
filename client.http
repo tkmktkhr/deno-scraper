@@ -6,5 +6,11 @@ GET http://localhost:9001/vocabularies
 ###
 GET http://localhost:9001/tests
 
+
 ###
 POST http://localhost:9001/tests
+content-type: application/json
+
+{
+  "title": "Petting 🦕"
+}

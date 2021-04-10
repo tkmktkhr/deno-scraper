@@ -1,43 +1,35 @@
-import { Context, Router, RouterContext } from "../../mod.ts";
-import { BadRequest } from "../../common/error.ts";
-// import { VocabularyController } from "../interfaces/controllers/vocabulary/vocabularyController.ts";
+import { Router, RouterContext } from "../../mod.ts";
 
 const router = new Router();
 
 router.get(
   "/tests",
   (context: RouterContext) => {
+    
     // controller
     // const result = await vocabularyController.findAllVocabularies();
-    console.log("400エラ-投げる");
-
-    const result = "result";
-    // context.response.status = 400;
-    // const err = new BadRequest('400えらーだ');
-    context.throw(400, "400errorororor");
-    // const err = new BadRequest('badrequest');
-    // console.log(err.stausCode);
-    console.log("Ended process here is Router");
-    console.log(result);
-    // context.response.body = result;
+    // const a = new Deno.Buffer(new TextDecoder().decode([`%E6%9D%B1%E4%BA%AC`, ]));
+    const a = new TextEncoder().encode("東京");
+    console.log(a);
+    console.log(new TextDecoder().decode(a));
+    const b = new Deno.Buffer(a);
+    console.log(b);
+    
+    context.response.redirect(
+      "https://www.airbnb.jp/s/%E6%9D%B1%E4%BA%AC--%E6%9D%B1%E4%BA%AC%E9%83%BD--%E6%97%A5%E6%9C%AC/homes?place_id=ChIJXSModoWLGGARILWiCfeu2M0&refinement_paths%5B%5D=%2Fhomes&refinement_path=%2Fhomes&tab_id=home_tab&reset_filters=true&checkin=2021-05-09&checkout=2021-06-12&adults=2&children=0&infants=0&search_type=AUTOSUGGEST",
+    );
   },
 );
 
 router.post(
   "/tests",
-  (context: RouterContext) => {
-    // controller
-    // const result = await vocabularyController.findAllVocabularies();
-    console.log("inside of post router");
-
-    const result = "result";
-    const err = new BadRequest("badrequest");
-    // context.response.status = 400;
-    // console.log(err);
-
-    // console.log("Ended process here is Router");
-    // console.log(result);
-    context.response.body = err;
+  async (context: RouterContext) => {
+    const body = context.request.body();
+    const result = await body.value;
+    
+    context.response.body = {
+      title: `The title is ${result.title}.`
+      };
   },
 );
 
