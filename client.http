@@ -14,3 +14,12 @@ content-type: application/json
 {
   "title": "Petting 🦕"
 }
+
+###
+POST http://localhost:9001/search/accommodation/1000
+content-type: application/json
+
+{
+  "name": "Petting 🦕",
+  "address": "Tokyo"
+}

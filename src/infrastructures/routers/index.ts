@@ -1,5 +1,5 @@
 import { Router, RouterContext } from "../../mod.ts";
-
+import { SearchAccommodationController } from "../../interfaces/controllers/SearchAccommodationController.ts";
 const router = new Router();
 
 router.get(
@@ -20,16 +20,16 @@ router.get(
   },
 );
 
-router.get(
-  "/tests/:param",
-  (context: RouterContext) => {
-    const params = context.params;
-    console.log(params);
+router.post(
+  "/search/accommodation/:param",
+  async (context: RouterContext) => {
+    const reqBody = context.request.body();
+    const body = await reqBody.value;
+    console.log(body);
+    const controller = new SearchAccommodationController();
+    const result = await controller.searchAccommodation(body);
 
-    context.response.body = {
-      title: `${params}.`,
-      contents: "content",
-    };
+    context.response.body = result;
   },
 );
 
