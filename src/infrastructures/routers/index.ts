@@ -5,7 +5,6 @@ const router = new Router();
 router.get(
   "/tests",
   (context: RouterContext) => {
-    
     // controller
     // const result = await vocabularyController.findAllVocabularies();
     // const a = new Deno.Buffer(new TextDecoder().decode([`%E6%9D%B1%E4%BA%AC`, ]));
@@ -14,10 +13,23 @@ router.get(
     console.log(new TextDecoder().decode(a));
     const b = new Deno.Buffer(a);
     console.log(b);
-    
+
     context.response.redirect(
       "https://www.airbnb.jp/s/%E6%9D%B1%E4%BA%AC--%E6%9D%B1%E4%BA%AC%E9%83%BD--%E6%97%A5%E6%9C%AC/homes?place_id=ChIJXSModoWLGGARILWiCfeu2M0&refinement_paths%5B%5D=%2Fhomes&refinement_path=%2Fhomes&tab_id=home_tab&reset_filters=true&checkin=2021-05-09&checkout=2021-06-12&adults=2&children=0&infants=0&search_type=AUTOSUGGEST",
     );
+  },
+);
+
+router.get(
+  "/tests/:param",
+  (context: RouterContext) => {
+    const params = context.params;
+    console.log(params);
+
+    context.response.body = {
+      title: `${params}.`,
+      contents: "content",
+    };
   },
 );
 
@@ -26,10 +38,10 @@ router.post(
   async (context: RouterContext) => {
     const body = context.request.body();
     const result = await body.value;
-    
+
     context.response.body = {
-      title: `The title is ${result.title}.`
-      };
+      title: `The title is ${result.title}.`,
+    };
   },
 );
 
