@@ -6,7 +6,7 @@ export class BadRequest extends Error {
   name: string;
 
   constructor(msg: string) {
-    super()
+    super();
     this.stausCode = Status.BadRequest;
     this.name = msg;
   }
@@ -18,7 +18,7 @@ export class Unauthorized extends Error {
   name: string;
 
   constructor(msg: string) {
-    super()
+    super();
     this.stausCode = Status.Unauthorized;
     this.name = msg;
   }
@@ -30,7 +30,7 @@ export class Forbidden extends Error {
   name: string;
 
   constructor(msg: string) {
-    super()
+    super();
     this.stausCode = Status.Forbidden;
     this.name = msg;
   }
@@ -42,7 +42,7 @@ export class NotFound extends Error {
   name: string;
 
   constructor(msg: string) {
-    super()
+    super();
     this.stausCode = Status.NotFound;
     this.name = msg;
   }
@@ -54,7 +54,7 @@ export class Conflict extends Error {
   name: string;
 
   constructor(msg: string) {
-    super()
+    super();
     this.stausCode = Status.Conflict;
     this.name = msg;
   }
@@ -66,7 +66,7 @@ export class InternalServerError extends Error {
   name: string;
 
   constructor(msg: string) {
-    super()
+    super();
     this.stausCode = Status.InternalServerError;
     this.name = msg;
   }

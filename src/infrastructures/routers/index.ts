@@ -25,7 +25,6 @@ router.post(
   async (context: RouterContext) => {
     const reqBody = context.request.body();
     const body = await reqBody.value;
-    console.log(body);
     const controller = new SearchAccommodationController();
     const result = await controller.searchAccommodation(body);
 

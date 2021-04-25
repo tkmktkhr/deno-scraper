@@ -8,5 +8,5 @@ export class SearchAccommodationUseCase {
 
   searchAccommodation = async (reqBody: any) => {
     return await this.searchAccommodationRepository.search(reqBody);
-  }
+  };
 }

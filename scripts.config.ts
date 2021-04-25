@@ -6,27 +6,27 @@ const config: DenonConfig = {
     net: true,
     env: true,
     read: "./src/db",
-    write: "./src/db"
+    write: "./src/db",
   },
   scripts: {
     start: {
       cmd: "deno run -c tsconfig.json ./src/app.ts",
       desc: "Run the main server",
       env: env(),
-      watch: true
+      watch: true,
     },
     debug: {
       cmd: "deno run --inspect -c tsconfig.json ./src/app.ts",
       desc: "Run the main server in debug mode",
       env: env(),
-      watch: true
-    }
+      watch: true,
+    },
   },
   watcher: {
     interval: 350,
     exts: ["js", "jsx", "ts", "tsx", "json"],
     match: ["**/*.*"],
-    skip: ["*/.git/*", "./db/*"]
+    skip: ["*/.git/*", "./db/*"],
   },
 };
 
