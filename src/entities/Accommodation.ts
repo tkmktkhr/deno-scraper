@@ -1,10 +1,13 @@
 import { Station } from "../valueObject/Station.ts";
 import { SuperMarket } from "../valueObject/SuperMarket.ts";
 import { TBedSize } from "../constants/bedSize.ts";
+import { TtypeOfRoom } from "../constants/typeOfRoom.ts";
 
 export class Accommodation {
   accommodationId?: number;
-  companyName: string;
+  accommodationHost: string;
+  accommodationName: string;
+  typeOfRoom: TtypeOfRoom;
   price: number;
   wifi: boolean;
   pocketWifi: boolean;

@@ -1,5 +1,7 @@
 import { SearchAccommodationRepository } from "../databases/repositoryImples/SearchAccommodationRepository.ts";
 import { SearchAccommodationUseCase } from "../../usecases/SearchAccommodationUseCase.ts";
+import { Accommodation } from "../../entities/Accommodation.ts";
+import { TAccommodationHost } from "../../constants/accommodationHost.ts";
 
 export class SearchAccommodationController {
   private searchAccommodationRepository: SearchAccommodationRepository;
@@ -8,7 +10,7 @@ export class SearchAccommodationController {
     this.searchAccommodationRepository = new SearchAccommodationRepository();
   }
 
-  searchAccommodation = async (reqBody: any) => {
+  searchAccommodation = async (reqVal: any) => {
     // RequestBody Validation
 
     // Usecase
@@ -16,7 +18,11 @@ export class SearchAccommodationController {
       this.searchAccommodationRepository,
     );
 
-    const result = await usecase.searchAccommodation(reqBody);
+    // const acc = new Accommodation({
+
+    // })
+
+    const result = await usecase.searchAccommodation(reqVal);
     return result;
   };
 }
