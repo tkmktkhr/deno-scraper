@@ -5,4 +5,4 @@ export const ACCOMMODATION_HOST = {
   ADDRESS: "nowRoom",
   ALL: null,
 } as const;
-export type TAccommodationHost = keyof typeof ACCOMMODATION_HOSTS;
+export type TAccommodationHost = keyof typeof ACCOMMODATION_HOST;

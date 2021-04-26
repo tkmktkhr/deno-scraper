@@ -1,7 +1,8 @@
 import { TtypeOfRoom } from "../../constants/typeOfRoom";
+import { TAccommodationHost } from "../../constants/accommodationHost.ts";
 
 /**
- * @param {TAccommodationHosts} accommodationHost Accommodation Host Name. Ex.) Airbnb, HafH etc. If it is null, all companies are search condition.
+ * @param {TAccommodationHost} accommodationHost Accommodation Host Name. Ex.) Airbnb, HafH etc. If it is null, all companies are search condition.
  * @param {string} location Where the accommodation is located. Ex.) 'Tokyo', '世田谷区, 東京' etc.
  * @param {number} priceRangeFrom Total price minimum. Ex.) 100000. (Unit: Japanese yen)
  * @param {number} priceRangeTo Total price maximum. Ex.) 150000. (Unit: Japanese yen)
