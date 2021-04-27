@@ -1,4 +1,4 @@
-import { TtypeOfRoom } from "../../constants/typeOfRoom";
+import { TtypeOfRoom } from "../../constants/typeOfRoom.ts";
 import { TAccommodationHost } from "../../constants/accommodationHost.ts";
 
 /**
