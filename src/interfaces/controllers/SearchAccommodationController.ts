@@ -16,9 +16,9 @@ export class SearchAccommodationController {
     this.searchAccommodationRepository = new SearchAccommodationRepository();
   }
 
-  searchAccommodation = async (reqVal: TSearchAccommodation) => {
+  searchAccommodation = async (req: TSearchAccommodation) => {
     // RequestBody Validation
-    validate(reqVal);
+    validate(req);
     // Usecase
     const usecase = new SearchAccommodationUseCase(
       this.searchAccommodationRepository,
@@ -28,17 +28,18 @@ export class SearchAccommodationController {
 
     // })
 
-    const result = await usecase.searchAccommodation(reqVal);
+    const result = await usecase.searchAccommodation(req);
     return result;
   };
 }
 
-const validate = (reqVal: TSearchAccommodation) => {
+// TODO Return some errors at the same time.
+const validate = (req: TSearchAccommodation) => {
   if (
-    !ACCOMMODATION_HOST_ARRAY.includes(reqVal.accommodationHost)
+    !ACCOMMODATION_HOST_ARRAY.includes(req.accommodationHost)
   ) {
     throw new CustomError(Status.BadRequest, [
-      `accommodationHost: ${reqVal.accommodationHost}`,
+      `accommodationHost: ${req.accommodationHost}`,
     ]);
   }
 };

@@ -10,7 +10,6 @@ router.post(
     const reqBody = context.request.body();
     const val = await reqBody.value;
     const result = await searchAccommodation.searchAccommodation(val);
-
     context.response.body = result;
   },
 );
