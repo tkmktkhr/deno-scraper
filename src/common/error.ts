@@ -1,73 +1,16 @@
-import { Status } from "../mod.ts";
+import { STATUS_TEXT } from "../mod.ts";
 
-// 400
-export class BadRequest extends Error {
-  stausCode: number;
+export class CustomError extends Error {
+  code: number;
   name: string;
+  contents: string[];
 
-  constructor(msg: string) {
+  constructor(statusCode: number, contents: string[]) {
     super();
-    this.stausCode = Status.BadRequest;
-    this.name = msg;
+    this.code = statusCode;
+    this.name = STATUS_TEXT.get(statusCode);
+    this.contents = contents;
   }
 }
 
-// 401
-export class Unauthorized extends Error {
-  stausCode: number;
-  name: string;
-
-  constructor(msg: string) {
-    super();
-    this.stausCode = Status.Unauthorized;
-    this.name = msg;
-  }
-}
-
-// 403
-export class Forbidden extends Error {
-  stausCode: number;
-  name: string;
-
-  constructor(msg: string) {
-    super();
-    this.stausCode = Status.Forbidden;
-    this.name = msg;
-  }
-}
-
-// 404
-export class NotFound extends Error {
-  stausCode: number;
-  name: string;
-
-  constructor(msg: string) {
-    super();
-    this.stausCode = Status.NotFound;
-    this.name = msg;
-  }
-}
-
-// 409
-export class Conflict extends Error {
-  stausCode: number;
-  name: string;
-
-  constructor(msg: string) {
-    super();
-    this.stausCode = Status.Conflict;
-    this.name = msg;
-  }
-}
-
-// 500
-export class InternalServerError extends Error {
-  stausCode: number;
-  name: string;
-
-  constructor(msg: string) {
-    super();
-    this.stausCode = Status.InternalServerError;
-    this.name = msg;
-  }
-}
+// Reference for future, [oak HttpError]https://github.com/oakserver/oak/blob/main/httpError.ts

@@ -20,6 +20,12 @@ POST http://localhost:9001/search/accommodation/1000
 content-type: application/json
 
 {
-  "name": "Petting 🦕",
-  "address": "Tokyo"
+  "accommodationHost": "test",
+  "location": "ss",
+  "priceRangeFrom": 1,
+  "priceRangeTo": 1,
+  "checkIn": "2021-04-05",
+  "checkOut": "2021-04-05",
+  "guests": 2,
+  "typeOfRoom": null
 }

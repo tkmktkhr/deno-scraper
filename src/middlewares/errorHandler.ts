@@ -1,52 +1,31 @@
 import { Context, isHttpError, Status } from "../mod.ts";
+import { CustomError } from "../common/error.ts";
+import { TResponse } from "../interfaces/responses/index.ts";
 
 export const errorHandler = async (ctx: Context, next: () => Promise<void>) => {
   try {
     await next();
   } catch (err) {
-    if (isHttpError(err)) {
-      switch (err.status) {
-        case Status.BadRequest:
-          ctx.response.status = Status.BadRequest;
-          ctx.response.body = createError(err);
-          break;
-        case Status.Unauthorized:
-          ctx.response.status = Status.Unauthorized;
-          ctx.response.body = createError(err);
-          break;
-        case Status.Forbidden:
-          ctx.response.status = Status.Forbidden;
-          ctx.response.body = createError(err);
-          break;
-        case Status.NotFound:
-          ctx.response.status = Status.NotFound;
-          ctx.response.body = createError(err);
-          break;
-        case Status.Conflict:
-          ctx.response.status = Status.Conflict;
-          ctx.response.body = createError(err);
-          break;
-        default:
-          ctx.response.status = Status.InternalServerError;
-          ctx.response.body = createError(err);
-      }
+    if (!isHttpError(err)) {
+      ctx.response.status = err.code;
+      ctx.response.body = createError(err);
     } else {
-      // rethrow if it can't handle the error
-      console.log(err);
-      console.log("OTHER ERROR IN ERROR HANDLER");
-      throw err;
+      // throw returns content-type: text/plain; charset=utf-8
+      ctx.throw(Status.InternalServerError, "Unexpected Error");
     }
   }
 };
 
 type TErrorFormat = {
+  code: number;
   name: string;
-  msg: string;
 };
 
-const createError = (err: Error): TErrorFormat => {
+const createError = (err: CustomError): TResponse<TErrorFormat> => {
   return {
-    name: err.name,
-    msg: err.message,
+    data: {
+      code: err.code,
+      name: err.name,
+    },
   };
 };
