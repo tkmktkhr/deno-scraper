@@ -1,13 +1,14 @@
 import { ISearchAccommodationRepository } from "../../repositories/ISearchAccommodationRepository.ts";
+import { TSearchAccommodation } from "../../../interfaces/requests/searchAccommodationRequest.ts";
 
 export class SearchAccommodationRepository
   implements ISearchAccommodationRepository {
-  search = (reqBody: any) => {
+  search = (reqBody: TSearchAccommodation) => {
     console.log(reqBody);
 
     return {
-      name: `name is ${reqBody.name}`,
-      address: `address is ${reqBody.address}`,
+      accommodationHost: `host is ${reqBody.accommodationHost}`,
+      location: `location is ${reqBody.location}`,
     };
   };
 }

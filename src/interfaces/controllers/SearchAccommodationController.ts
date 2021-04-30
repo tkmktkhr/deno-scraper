@@ -28,6 +28,7 @@ export class SearchAccommodationController {
 
     // })
 
+    // MUST don't pass reqBody(interfaces layer) to Usecase layer.
     const result = await usecase.searchAccommodation(req);
     return result;
   };
@@ -43,3 +44,14 @@ const validate = (req: TSearchAccommodation) => {
     ]);
   }
 };
+
+// {
+//   accommodationHost: TAccommodationHost;
+//   location: string; // Want to create as a ValueObject.
+//   priceRangeFrom: number;
+//   priceRangeTo: number;
+//   checkIn: Date;
+//   checkOut: Date;
+//   guests: number;
+//   typeOfRoom: TtypeOfRoom | null;
+// }

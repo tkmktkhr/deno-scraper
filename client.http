@@ -20,7 +20,7 @@ POST http://localhost:9001/search/accommodation/1000
 content-type: application/json
 
 {
-  "accommodationHost": "test",
+  "accommodationHost": "airbnb",
   "location": "ss",
   "priceRangeFrom": 1,
   "priceRangeTo": 1,
