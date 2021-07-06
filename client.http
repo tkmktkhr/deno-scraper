@@ -1,0 +1,31 @@
+GET http://localhost:9001/
+
+###
+GET http://localhost:9001/vocabularies
+
+###
+GET http://localhost:9001/tests
+
+
+###
+POST http://localhost:9001/tests
+content-type: application/json
+
+{
+  "title": "Petting 🦕"
+}
+
+###
+POST http://localhost:9001/search/accommodation/1000
+content-type: application/json
+
+{
+  "accommodationHost": "airbnb",
+  "location": "ss",
+  "priceRangeFrom": 1,
+  "priceRangeTo": 1,
+  "checkIn": "2021-04-05",
+  "checkOut": "2021-04-05",
+  "guests": 2,
+  "typeOfRoom": null
+}
